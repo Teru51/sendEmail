@@ -3,13 +3,17 @@ const aws = require('aws-sdk');
 const ses = new aws.SES({ region: 'ap-northeast-1' });
 
 class KintoneSetting {
-  constructor(domain, apiToken, appId) {
+  domain: string;
+  apiToken: string;
+  appId: number;
+
+  constructor(domain: string, apiToken: string, appId: number) {
     this.domain = `https://${domain}.cybozu.com/`;
     this.apiToken = apiToken;
     this.appId = appId;
   }
 
-  async getTemplate(recordId) {
+  async getTemplate(recordId: number) {
     try {
       const client = new KintoneRestAPIClient({
         baseUrl: this.domain,
@@ -24,11 +28,16 @@ class KintoneSetting {
       return resp;
     } catch (err) {
       console.log('ERROR: テンプレートレコードの取得に失敗しました');
-      console.log('ERROR: ', err);
+      return err;
     }
   }
 
-  async sendEmail(toAddresses, fromAddress, subject, content) {
+  async sendEmail(
+    toAddresses: Array<string>,
+    fromAddress: string,
+    subject: string,
+    content: string
+  ) {
     try {
       const params = {
         Destination: {
