@@ -2,7 +2,7 @@ const { KintoneRestAPIClient } = require('@kintone/rest-api-client');
 const aws = require('aws-sdk');
 const ses = new aws.SES({ region: 'ap-northeast-1' });
 
-class KintoneSetting {
+export class KintoneSetting {
   domain: string;
   apiToken: string;
   appId: number;
