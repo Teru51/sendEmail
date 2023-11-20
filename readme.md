@@ -30,6 +30,13 @@ await sender.sendEmail(toAddress, fromAddress, subject, content);
 $ npm install @terunet/send-email
 ```
 
+aws-sdk および kintone-rest-api-client も同時にインストールが必要です。
+
+```node
+$ npm install aws-sdk
+$ npm install @kintone/rest-api-client
+```
+
 ### Usage
 
 0. import を行う
