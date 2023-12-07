@@ -27,8 +27,8 @@ export class KintoneSetting {
       });
       return resp;
     } catch (err) {
-      console.log('ERROR: テンプレートレコードの取得に失敗しました');
-      return err;
+      console.log('sendEmail_ERROR: テンプレートレコードの取得に失敗しました');
+      console.log('sendEmail_ERROR:', err);
     }
   }
 
@@ -55,8 +55,8 @@ export class KintoneSetting {
 
       return ses.sendEmail(params).promise();
     } catch (err) {
-      console.log('ERROR: メールの送信処理に失敗しました');
-      console.log('ERROR:', err);
+      console.log('sendEmail_ERROR: メールの送信処理に失敗しました');
+      console.log('sendEmail_ERROR:', err);
     }
   }
 }
