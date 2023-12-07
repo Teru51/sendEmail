@@ -6,29 +6,29 @@ export class KintoneSetting {
   domain: string;
   apiToken: string;
   appId: number;
+  client: any;
 
   constructor(domain: string, apiToken: string, appId: number) {
     this.domain = `https://${domain}.cybozu.com/`;
     this.apiToken = apiToken;
     this.appId = appId;
+    this.client = new KintoneRestAPIClient({
+      baseUrl: this.domain,
+      auth: {
+        apiToken: this.apiToken,
+      },
+    });
   }
 
   async getTemplate(recordId: number) {
     try {
-      const client = new KintoneRestAPIClient({
-        baseUrl: this.domain,
-        auth: {
-          apiToken: this.apiToken,
-        },
-      });
-      const resp = await client.record.getRecord({
+      const resp = await this.client.record.getRecord({
         app: this.appId,
         id: recordId,
       });
       return resp;
     } catch (err) {
-      console.log('sendEmail_ERROR: テンプレートレコードの取得に失敗しました');
-      console.log('sendEmail_ERROR:', err);
+      console.error('Failed to get template record:', err);
     }
   }
 
@@ -55,8 +55,7 @@ export class KintoneSetting {
 
       return ses.sendEmail(params).promise();
     } catch (err) {
-      console.log('sendEmail_ERROR: メールの送信処理に失敗しました');
-      console.log('sendEmail_ERROR:', err);
+      console.error('Failed to send email:', err);
     }
   }
 }
