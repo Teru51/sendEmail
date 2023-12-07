@@ -1,6 +1,6 @@
 {
   "name": "@terunet/send-email",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "main": "dist/sendEmail.js",
   "types": "dist/sendEmail.d.ts",
   "scripts": {
